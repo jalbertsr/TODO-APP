@@ -1,0 +1,19 @@
+{
+  "name": "login-page",
+  "version": "1.0.0",
+  "description": "Simple login page",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "jalbertsr",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-session": "^1.3.0",
+    "express": "^4.15.4",
+    "pug": "^2.0.0-rc.3",
+    "strftime": "^0.10.0"
+  }
+}
