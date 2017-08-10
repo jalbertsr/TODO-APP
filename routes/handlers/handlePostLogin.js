@@ -4,11 +4,11 @@ const strftime = require('strftime')
 function handlePostLogin (req, res) {
   const { email, password } = req.body
   let autentification = false
-  let usersArr
+  // let usersArr
 
   fs.readFile('./data-db/users_txt.txt', 'utf-8', (err, data) => {
     if (err) throw err
-    usersArr = data.split('\r\n') // (/\r?\n/)
+    const usersArr = data.split('\r\n') // (/\r?\n/)
     // console.log(usersArr)
     usersArr.forEach((user) => {
       let [emailDB, passDB] = user.split(':')
