@@ -7,13 +7,12 @@ const routes = require('./routes/')
 
 const app = express()
 const PORT = 3000
+const createId = () => '_' + Math.random().toString(36).substr(2, 9)
 
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
-const createId = () => '_' + Math.random().toString(36).substr(2, 9)
 
 app.use(cookieSession({
   name: 'LoginCookieSession',
