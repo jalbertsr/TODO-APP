@@ -10,6 +10,10 @@ function handlePostLogin (req, res) {
     if (err) throw err
     const usersArrEncrypted = data.split('\r\n') // (/\r?\n/)
     const usersArrDecrypted = usersArrEncrypted.map((aAuthLine) => decrypt(aAuthLine))
+    console.log('------------ encrypted --------------')
+    console.log(usersArrEncrypted)
+    console.log('------------ decrypted --------------')
+    console.log(usersArrDecrypted)
     usersArrDecrypted.forEach((user) => {
       let [emailDB, passDB] = user.split(':')
       if (emailDB === email && passDB === password) {
@@ -22,8 +26,20 @@ function handlePostLogin (req, res) {
         console.log('-------------------------------------')
       }
     })
+    if (autentification) {
+      loadJSONtasks(req, res, email)
+    } else res.redirect('/error')
+  })
+}
 
-    autentification ? res.redirect('/home') : res.redirect('/error')
+function loadJSONtasks (req, res, userID) {
+  const dataFileName = `./data-db/users_tasks/${userID}.json`
+  fs.readFile(dataFileName, 'utf-8', (err, data) => {
+    if (err) throw err
+    data = JSON.parse(data)
+    req.session.tasks = data["tasks"]
+    req.session.completed = data["completed"]
+    res.redirect('/tasks/')
   })
 }
 

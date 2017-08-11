@@ -1,3 +1,172 @@
-body{
-	padding-top:20px;
+.header, .footer {
+  background: black;
+  color: white;
+  padding: 0 20px;
+}
+
+.header a, .header h3, .footer a {
+  color: white;
+}
+
+
+/*---------------------------------------------------------------------------------*/
+html {
+  height: 100%;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+h1.projectName{
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
+}
+
+h1.projectNameDone{
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
+  margin-bottom: 30px;
+}
+
+p.taskDone{
+  display: inline-block;
+}
+
+button.bDone{
+  display: inline-block;
+}
+
+p.title{
+  font-size: 18px;
+  margin-bottom: 0px;
+}
+
+p.date{
+  font-size: 12px;
+  font-family: 'Quicksand', sans-serif;
+  margin-bottom: 10px;
+}
+
+.input-sm{
+  display: flex;
+  justify-content: center;
+  margin-left: 5%;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.btn{
+  margin-left: 2%;
+  margin-top: 32px;
+}
+
+button.btn:visited, button.btn:focus, button.btn:hover {
+  color: white;
+  text-decoration: none;
+}
+
+ul{
+  list-style: none;
+}
+
+li{
+  margin-bottom:5%;
+  font-size: 2em;
+}
+
+#container {
+  height: 650px;
+  margin-top: 20px;
+  box-shadow: 0 0 20px #888888;
+  background: -moz-linear-gradient(0deg, #08FEDD 13%, #E7F619 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, 0deg, color-stop(13%, 08FEDD), color-stop(100%, E7F619));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(0deg, #08FEDD 13%, #E7F619 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(0deg, #08FEDD 13%, #E7F619 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(0deg, #08FEDD 13%, #E7F619 100%);
+  /* IE10+ */
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#1301FE', endColorstr='#F4F60C', GradientType='1');
+  /* for IE */
+  background: linear-gradient(0deg, #08FEDD 13%, #E7F619 100%);
+  /* W3C */
+  border: 1px solid #c0c0c0;
+}
+
+
+#toDoForm {
+  width: 100%;
+  display: flex;
+  wrap: nowrap;
+}
+
+form {
+  font-family: 'Quicksand', sans-serif;
+}
+
+input.input-sm {
+  outline: none;
+  border: none;
+  padding: 0;
+  text-indent: 10px;
+}
+
+button.btn, button.done, button.remove, button.removeAll, button.completed, button.logout{
+  height: 100%;
+  border: none;
+  background-color: #000000;
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button.done, button.remove{
+  width: 20%;
+}
+
+div.checkbox {
+  display: inline;
+}
+
+label {
+  display: block;
+  padding-left: 15px;
+  text-indent: -5px;
+  font-size: 10px;
+}
+input.checkbox {
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin:0;
+  vertical-align: bottom;
+  font-size: 10px;
+  position: relative;
+  top: 5px;
+  *overflow: hidden;
+}
+
+ol>li {
+  font-family: 'Kalam', cursive;
+  color: #161616;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.done, .remove {
+  font-family: 'Quicksand', sans-serif;
+  width: 20px;
+  font-size: 0.9rem;
+  float: right;
+  border-radius: 10px;
+  padding: 2px 0;
+  margin-left: 2%;
 }

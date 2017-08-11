@@ -24,6 +24,8 @@ app.use(cookieSession({
 
 app.use((req, res, next) => {
   req.session.login = req.session.login || ''
+  req.session.tasks = req.session.tasks || []
+  req.session.completed = req.session.completed || []
   next()
 })
 

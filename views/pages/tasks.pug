@@ -1,0 +1,24 @@
+extends ../layout
+block content
+  body 
+    #container.row.col-md-offset-4.col-md-4
+      h1.projectName TO-DO-LIST
+      form#toDoForm(action="/tasks/", method="POST")
+        input.input-sm(name='task', placeholder='add a task...', autofocus)
+        button.btn Add task
+      ol
+        each task in tasks
+          li
+            p.title(contenteditable=true)= task.name 
+            p.date= task.time
+            button.done(value=task.ID) Done
+            button.remove(value=task.ID) Remove
+            div.checkbox
+              label
+                input.checkbox(type="checkbox",value=task.ID) 
+                | Check!
+        button.removeAll Mark As Done
+        a(href='/completed/') 
+         button.completed Go to Completed
+        a(href='/logout/')
+         button.logout LogOut

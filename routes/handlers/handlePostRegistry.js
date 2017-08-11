@@ -20,7 +20,7 @@ function handlePostRegistry (req, res) {
     })
     if (existentUser) {
       console.log('Email already in use')
-      res.redirect('/regist/')
+      res.redirect('/regist/') //flash message
     } else {
       fs.appendFile('./data-db/users_txt.txt', encryptedData, function (err) {
         if (err) throw err
@@ -30,10 +30,16 @@ function handlePostRegistry (req, res) {
         console.log('registered at: ' + strftime('%F:%T', new Date()))
         console.log('encrypted as: ' + encryptedData)
         console.log('----------------------------------')
+        createUserTask(email)
         res.redirect('/')
       })
     }
   })
+}
+
+function createUserTask (userID) {
+  const newUserTask = {tasks: [], completed: []}
+  fs.writeFile(`./data-db/users_tasks/${userID}.json`, JSON.stringify(newUserTask), 'utf-8')
 }
 
 function encrypt (text) {
