@@ -1,4 +1,4 @@
-console.log('Javascript ready to go...')
+/* global $ */
 
 $('.remove').on('click', function (e) {
   e.preventDefault()
@@ -8,10 +8,22 @@ $('.remove').on('click', function (e) {
     url: '/task/' + taskID,
     method: 'DELETE'
   })
-  .then( data => {
+  .then(data => {
     $(this).parent().remove()
   })
+})
 
+$('.remove.bDone').on('click', function (e) {
+  e.preventDefault()
+  let taskID = $(this).val()
+
+  $.ajax({
+    url: '/completed/' + taskID,
+    method: 'DELETE'
+  })
+  .then(data => {
+    $(this).parent().remove()
+  })
 })
 
 $('.done').on('click', function (e) {
@@ -22,21 +34,20 @@ $('.done').on('click', function (e) {
     url: '/task/' + taskID,
     method: 'PUT'
   })
-  .then( data => {
+  .then(data => {
     $(this).parent().remove()
   })
-
 })
 
-$('button.removeAll').on('click', function (e) { 
+$('button.removeAll').on('click', function (e) {
   e.preventDefault()
-  var idsArray = $('.checkbox:checked').map(function() {
+  var idsArray = $('.checkbox:checked').map(function () {
     return $(this).val()
   }).get()
 
   var ids = idsArray.join(',')
   $.ajax({
-    url: '/tasks/'+ ids,
+    url: '/tasks/' + ids,
     method: 'PUT'
   })
   .then(data => {
@@ -44,35 +55,23 @@ $('button.removeAll').on('click', function (e) {
   })
 })
 
-$('p.title').on('keypress', function(e){
-  if (e.keyCode === 13 ) changeTaskName(e)
-  else{
-    $('p.title').blur(function(e){
-      e.preventDefault()
-      const text = $(this).text()
-      const id = $(this).siblings('button').val()
-      const data = {name:text, ID:id}
-
-      $.ajax({
-        url: '/edit/',
-        method: 'PUT',
-        data
-      }).then( data => {}) 
-    })
-  }  
+$('p.title').on('keypress', function (e) {
+  if (e.keyCode === 13) changeTaskName(e)
 })
 
+$('p.title').blur(function (e) {
+  changeTaskName(e)
+})
 
-function changeTaskName(e){
-
+function changeTaskName (e) {
   e.preventDefault()
-      const text = $(this).text()
-      const id = $(this).siblings('button').val()
-      const data = {name:text, ID:id}
+  const text = $(this).text()
+  const id = $(this).siblings('button').val()
+  const data = {name: text, ID: id}
 
-      $.ajax({
-        url: '/edit/',
-        method: 'PUT',
-        data
-      }).then(data => {})
+  $.ajax({
+    url: '/edit/',
+    method: 'PUT',
+    data
+  })
 }

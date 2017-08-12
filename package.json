@@ -4,7 +4,8 @@
   "description": "Simple login page using express cookie sessions",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app",
+    "dev": "nodemon app.js --ignore ./data-db"
   },
   "keywords": ["session", "express", "cookies", "login"],
   "author": "jalbertsr",

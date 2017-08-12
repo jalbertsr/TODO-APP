@@ -1,14 +1,20 @@
-const fs = require('fs')
+const path = require('path')
+const writeFile = require(path.join(process.cwd(), './helpers/writeFile'))
 
 function removeTask (req, res) {
   const id = req.params.id
   req.session.tasks = req.session.tasks.filter(task => task.ID !== id)
+  writeFile(req)
 
-  const dataFileName = './data-db/users_tasks/' + req.session.login.email + '.json'
-  const dataTasks = {"tasks": req.session.tasks, "completed": req.session.completed}
-  fs.writeFile(dataFileName, JSON.stringify(dataTasks), 'utf-8')
-
-  res.status(200).send('ok delete')
+  res.status(200).send('delete task succesful')
 }
 
-module.exports = removeTask
+function removeTaskCompleted (req, res) {
+  const id = req.params.id
+  req.session.completed = req.session.completed.filter(task => task.ID !== id)
+  writeFile(req)
+
+  res.status(200).send('delete done task succesful')
+}
+
+module.exports = {removeTask, removeTaskCompleted}

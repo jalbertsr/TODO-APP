@@ -1,4 +1,5 @@
-const fs = require('fs')
+const path = require('path')
+const writeFile = require(path.join(process.cwd(), './helpers/writeFile'))
 
 function updateTask (req, res) {
   const id = req.params.id
@@ -8,11 +9,8 @@ function updateTask (req, res) {
       req.session.tasks.splice(i, 1)
     }
   }
-  const dataFileName = './data-db/users_tasks/' + req.session.login.email + '.json'
-  const dataTasks = {"tasks": req.session.tasks, "completed": req.session.completed}
-  fs.writeFile(dataFileName, JSON.stringify(dataTasks), 'utf-8')
-
-  res.status(200).send('ok done')
+  writeFile(req)
+  res.status(200).send('change to done succesful')
 }
 
 module.exports = updateTask

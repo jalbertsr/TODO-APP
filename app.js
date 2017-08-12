@@ -8,8 +8,6 @@ const routes = require('./routes/')
 const app = express()
 const PORT = 3000
 const createId = () => '_' + Math.random().toString(36).substr(2, 9)
-global.cryptoPass = createId()
-global.algorithm = 'aes-256-ctr'
 
 app.use(express.static(path.join(__dirname, 'public')))
 

@@ -1,10 +1,13 @@
 const fs = require('fs')
 const strftime = require('strftime')
-const crypto = require('crypto')
+const path = require('path')
+const crypto = require(path.join(process.cwd(), './helpers/crypto'))
+const decrypt = crypto.decrypt
+const encrypt = crypto.encrypt
 
 function handlePostRegistry (req, res) {
   const { email, password } = req.body
-  const dataToWrite = email + ':' + password
+  const dataToWrite = `${email}:${password}`
   const encryptedData = '\r\n' + encrypt(dataToWrite)
   let existentUser = false
 
@@ -14,13 +17,11 @@ function handlePostRegistry (req, res) {
     const usersArrDecrypted = usersArrEncrypted.map((aAuthLine) => decrypt(aAuthLine))
     usersArrDecrypted.forEach((user) => {
       let [emailDB] = user.split(':')
-      if (emailDB === email) {
-        existentUser = true
-      }
+      if (emailDB === email) existentUser = true
     })
     if (existentUser) {
       console.log('Email already in use')
-      res.redirect('/regist/') //flash message
+      res.redirect('/registry/') // flash message
     } else {
       fs.appendFile('./data-db/users_txt.txt', encryptedData, function (err) {
         if (err) throw err
@@ -30,30 +31,16 @@ function handlePostRegistry (req, res) {
         console.log('registered at: ' + strftime('%F:%T', new Date()))
         console.log('encrypted as: ' + encryptedData)
         console.log('----------------------------------')
-        createUserTask(email)
+        createCleanUserTask(email)
         res.redirect('/')
       })
     }
   })
 }
 
-function createUserTask (userID) {
+function createCleanUserTask (userID) {
   const newUserTask = {tasks: [], completed: []}
   fs.writeFile(`./data-db/users_tasks/${userID}.json`, JSON.stringify(newUserTask), 'utf-8')
-}
-
-function encrypt (text) {
-  let cipher = crypto.createCipher(global.algorithm, global.cryptoPass)
-  let crypted = cipher.update(text, 'utf8', 'hex')
-  crypted += cipher.final('hex')
-  return crypted
-}
-
-function decrypt (text) {
-  let decipher = crypto.createDecipher(global.algorithm, global.cryptoPass)
-  let dec = decipher.update(text, 'hex', 'utf8')
-  dec += decipher.final('utf8')
-  return dec
 }
 
 module.exports = handlePostRegistry
