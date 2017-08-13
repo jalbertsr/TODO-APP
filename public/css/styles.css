@@ -21,6 +21,12 @@ body {
   overflow: hidden;
 }
 
+a.unstyle, a.unstyle:focus, a.unstyle:visited, a.unstyle:hover, a.unstyle:link{
+  text-decoration: none;
+  color: rgb(51, 51, 51);
+  font-family: 'Quicksand', sans-serif;
+}
+
 h1.projectName{
   text-align: center;
   font-family: 'Quicksand', sans-serif;
@@ -58,6 +64,11 @@ p.date{
   margin-top: 30px;
   margin-bottom: 20px;
   width: 100%;
+}
+
+.input-margin{
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 
 .btn{
