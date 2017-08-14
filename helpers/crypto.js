@@ -1,9 +1,6 @@
 const crypto = require('crypto')
 const createId = () => '_' + Math.random().toString(36).substr(2, 9)
-
- // createID is a password/keyword unique for every time the server is started shuteddown or restarted
- // in consequence the old user(email:password) .txt will no be able to be decrypted
-const cryptoPass = 'hola'
+const cryptoPass = createId()
 const algorithm = 'aes-256-ctr'
 
 function encrypt (text) {
