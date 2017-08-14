@@ -1,13 +1,21 @@
 {
-  "name": "login-page",
+  "name": "to-do-app",
   "version": "1.0.0",
-  "description": "Simple login page using express cookie sessions",
+  "description": "Simple todo app with login and register page using express cookie sessions",
   "main": "app.js",
   "scripts": {
+    "prestart": "npm install",
     "start": "node app",
-    "dev": "nodemon app.js --ignore ./data-db"
+    "dev": "nodemon app --ignore ./data-db",
+    "dev:debug": "DEBUG=*,-nodemon*,-send* npm run dev"
   },
-  "keywords": ["session", "express", "cookies", "login"],
+  "keywords": [
+    "session",
+    "express",
+    "cookies",
+    "login",
+    "to-do-app"
+  ],
   "author": "jalbertsr",
   "license": "ISC",
   "dependencies": {
