@@ -1,6 +1,6 @@
 const crypto = require('crypto')
 const createId = () => '_' + Math.random().toString(36).substr(2, 9)
-const cryptoPass = createId()
+const cryptoPass = 'secret'
 const algorithm = 'aes-256-ctr'
 
 function encrypt (text) {

@@ -5,7 +5,7 @@ $('.remove').on('click', function (e) {
   let taskID = $(this).val()
 
   $.ajax({
-    url: '/task/' + taskID,
+    url: `/task/${taskID}`,
     method: 'DELETE'
   })
   .then(data => {
@@ -18,7 +18,7 @@ $('.remove.bDone').on('click', function (e) {
   let taskID = $(this).val()
 
   $.ajax({
-    url: '/completed/' + taskID,
+    url: `/completed/${taskID}`,
     method: 'DELETE'
   })
   .then(data => {
@@ -31,7 +31,7 @@ $('.done').on('click', function (e) {
   let taskID = $(this).val()
 
   $.ajax({
-    url: '/task/' + taskID,
+    url: `/task/${taskID}`,
     method: 'PUT'
   })
   .then(data => {
@@ -47,7 +47,7 @@ $('button.removeAll').on('click', function (e) {
 
   var ids = idsArray.join(',')
   $.ajax({
-    url: '/tasks/' + ids,
+    url: `/tasks/${ids}`,
     method: 'PUT'
   })
   .then(data => {

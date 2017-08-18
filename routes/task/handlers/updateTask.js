@@ -1,16 +1,11 @@
-const path = require('path')
-const writeFile = require(path.join(process.cwd(), './helpers/writeFile'))
+const Task = require('../../../data-db/models/Task')
 
-function updateTask (req, res) {
-  const id = req.params.id
-  for (let i = 0; i < req.session.tasks.length; i++) {
-    if (req.session.tasks[i].ID === id) {
-      req.session.completed.push(req.session.tasks[i])
-      req.session.tasks.splice(i, 1)
-    }
-  }
-  writeFile(req)
-  res.status(200).send('change to done succesful')
+function editTask (req, res) {
+  const { title, id } = req.params
+
+  Task.findByIdAndUpdate(id, {done: true})
+    .then(() => res.redirect('tasks/'))
+    .catch(() => res.send(`FAIL to add task w/ ${title}`))
 }
 
-module.exports = updateTask
+module.exports = editTask

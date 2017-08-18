@@ -1,20 +1,10 @@
-const path = require('path')
-const writeFile = require(path.join(process.cwd(), './helpers/writeFile'))
+const Task = require('../../../data-db/models/Task')
 
 function removeTask (req, res) {
-  const id = req.params.id
-  req.session.tasks = req.session.tasks.filter(task => task.ID !== id)
-  writeFile(req)
-
-  res.status(200).send('delete task succesful')
+  const { id } = req.params
+  Task.findByIdAndRemove(id)
+    .then(() => res.redirect('tasks/'))
+    .catch(() => res.send(`FAIL!! Task w/ id ${id} was NOT removed`))
 }
 
-function removeTaskCompleted (req, res) {
-  const id = req.params.id
-  req.session.completed = req.session.completed.filter(task => task.ID !== id)
-  writeFile(req)
-
-  res.status(200).send('delete done task succesful')
-}
-
-module.exports = {removeTask, removeTaskCompleted}
+module.exports = removeTask

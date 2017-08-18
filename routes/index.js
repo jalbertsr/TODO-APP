@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
-const deleteTask = require('./task/handlers/removeTask')
+const removeTask = require('./task/handlers/removeTask')
 const updateTask = require('./task/handlers/updateTask')
+const createTask = require('./task/handlers/createTask')
 const editTask = require('./task/handlers/editTask')
-const handlePostTasks = require('./tasks/handlers/handlePostTasks')
 const handlePutTasks = require('./tasks/handlers/handlePutTasks')
 
 const showTasks = require('./tasks/handlers/showTasks')
@@ -21,15 +21,15 @@ router.get('/', (req, res) => {
   res.redirect('/login/')
 })
 
-router.delete('/task/:id', deleteTask.removeTask)
-router.delete('/completed/:id', deleteTask.removeTaskCompleted)
+router.delete('/task/:id', removeTask)
 router.put('/task/:id', updateTask)
 router.put('/edit/', editTask)
-router.post('/tasks/', handlePostTasks)
+router.post('/tasks/', createTask)
 router.put('/tasks/:ids', handlePutTasks)
 
 router.get('/tasks/', showTasks)
 router.get('/completed/', showCompletedTasks)
+
 router.get('/login/', showLogin)
 router.get('/registry/', showRegistry)
 router.get('/error/', showUnauthorized)

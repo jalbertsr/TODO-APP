@@ -1,5 +1,11 @@
+const Task = require('../../../data-db/models/Task')
+
 function showTasks (req, res) {
-  req.session.login ? res.render('pages/tasks', { tasks: req.session.tasks }) : res.redirect('/error/')
+  if (req.session.login) {
+    Task.find({done: false})
+      .then(tasks => res.render('pages/tasks', { tasks }))
+      .catch(() => res.redirect('tasks/'))
+  } else res.redirect('/error/')
 }
 
 module.exports = showTasks

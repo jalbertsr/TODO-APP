@@ -5,9 +5,9 @@ block content
       ul.row.col-md-offset-1.col-md-11
         each complete in completed
           li
-            p.title.taskDone= complete.name
-            p.date= complete.time
-            button.remove.bDone(value=complete.ID) Remove
+            p.title.taskDone= complete.title
+            p.date= complete.createdAt
+            button.remove.bDone(value=complete._id) Remove
         a(href='/tasks/') 
           button.completed Go to task List
         a(href='/logout/')

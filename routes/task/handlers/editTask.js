@@ -1,17 +1,11 @@
-const path = require('path')
-const writeFile = require(path.join(process.cwd(), './helpers/writeFile'))
+const Task = require('../../../data-db/models/Task')
 
 function editTask (req, res) {
-  const newName = req.body.name
-  const editedID = req.body.ID
+  const { title, id } = req.params
 
-  for (let i = 0; i < req.session.tasks.length; i++) {
-    if (req.session.tasks[i].ID === editedID) {
-      req.session.tasks[i].name = newName
-    }
-  }
-  writeFile(req)
-  res.status(200).send('ok edit done')
+  Task.findByIdAndUpdate(id, {title})
+    .then(() => res.redirect('/tasks/'))
+    .catch(() => res.send(`FAIL to add task w/ ${title}`))
 }
 
 module.exports = editTask
