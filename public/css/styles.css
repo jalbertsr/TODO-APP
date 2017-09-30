@@ -129,9 +129,20 @@ input.input-sm {
   text-indent: 10px;
 }
 
-button.btn, button.done, button.remove, button.removeAll, button.completed, button.logout{
+button.btn, button.done, button.remove, button.completed, button.removeAll, button.logout{
   height: 100%;
   border: none;
+  background-color: #000000;
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button.login{
+  height: 15%;
+  width: 50%;
+  border-radius: 5%;
   background-color: #000000;
   color: white;
   font-family: 'Quicksand', sans-serif;
