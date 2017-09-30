@@ -6,7 +6,7 @@ const cookieSession = require('cookie-session')
 const routes = require('./routes/')
 
 const app = express()
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 const createId = () => '_' + Math.random().toString(36).substr(2, 9)
 
 app.use(express.static(path.join(__dirname, 'public')))
